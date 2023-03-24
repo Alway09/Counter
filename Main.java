@@ -71,7 +71,7 @@ class CounterHandler {
             print("    Текущее значение счетчика - " + counter.getValue());
             return counter;
         } catch (FileNotFoundException e) {
-            print("Файл " + filename + " не найден. Счетчик не загружен.");
+            print("\n    Файл " + filename + " не найден. Счетчик не загружен.");
         } catch (IOException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
@@ -87,7 +87,8 @@ class CounterHandler {
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
-            print("    Значение счетчика сохранено в файл \"" + filename + "\"\n");
+            print("    Текущее значение счетчика - " + counter.getValue());
+            print("    Значение счетчика сохранено в файл \"" + filename + "\"");
         }
     }
 
