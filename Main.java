@@ -8,6 +8,8 @@ import java.io.IOException;
 import java.lang.ClassNotFoundException;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
+import java.lang.RuntimeException;
+import java.lang.Exception;
 
 public class Main {
     public static Counter COUNTER;
@@ -72,10 +74,8 @@ class CounterHandler {
             return counter;
         } catch (FileNotFoundException e) {
             print("\n    Файл " + filename + " не найден. Счетчик не загружен.");
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
 
         return new Counter();
@@ -84,11 +84,10 @@ class CounterHandler {
     public void store(Counter counter, String filename) {
         try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(filename))) {
             outputStream.writeObject(counter);
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
             print("    Текущее значение счетчика - " + counter.getValue());
             print("    Значение счетчика сохранено в файл \"" + filename + "\"");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 
